@@ -3,11 +3,14 @@ package com.kodilla.ecommercee.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@Entity(name = "product")
+@Entity
+@Table(name = "product")
 public class Product {
 
     @Id
@@ -19,7 +22,7 @@ public class Product {
     private String name;
 
     @Column(name = "price")
-    private Float price;
+    private BigDecimal price;
 
     @Column(name = "description")
     private String description;
