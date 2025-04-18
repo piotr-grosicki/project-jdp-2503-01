@@ -19,9 +19,5 @@ public class Group {
     @Id
     @GeneratedValue
     @Column(name = "group_id")
-    private Long group_id;
-
-    @Column(name = "group_name", length = 100)
-    private String group_name;
-
+    private Long groupId;
 }
