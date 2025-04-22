@@ -23,12 +23,11 @@ public class Order {
 
     @Column(length = 50)
     private String status;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
 }
