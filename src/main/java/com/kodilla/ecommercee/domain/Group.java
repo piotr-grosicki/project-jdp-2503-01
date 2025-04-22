@@ -5,12 +5,13 @@ import lombok.*;
 
 import java.util.List;
 
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "product")
+@Table(name = "group")
 public class Group {
 
     @Id
@@ -26,4 +27,5 @@ public class Group {
 
     @OneToMany(mappedBy = "groupId", fetch = FetchType.LAZY)
     private List<Product> products;
+
 }
