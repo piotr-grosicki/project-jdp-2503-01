@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+
 @Entity
 @Table(name = "users")
 @Getter
@@ -17,7 +19,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long id;
+    private Long userId;
 
     @Column(name = "username", nullable = false, length = 100)
     private String username;
@@ -32,6 +34,6 @@ public class User {
     private boolean isBlocked;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Order> orders;
+    private List<Order> orders = new ArrayList<>();
 
 }
