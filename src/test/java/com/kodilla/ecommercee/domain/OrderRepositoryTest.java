@@ -4,10 +4,10 @@ package com.kodilla.ecommercee.domain;
 import com.kodilla.ecommercee.repository.CartRepository;
 import com.kodilla.ecommercee.repository.OrderRepository;
 import com.kodilla.ecommercee.repository.UserRepository;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,8 +16,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
-@Transactional
+@DataJpaTest
 public class OrderRepositoryTest {
     @Autowired
     private OrderRepository orderRepository;
@@ -27,6 +26,7 @@ public class OrderRepositoryTest {
     private CartRepository cartRepository;
 
     @Test
+    @DisplayName("Test should create order.")
     void testCreateOrderWithUserAndCart() {
         //Given
         User user = userRepository.save(new User(null, "order_user", "email@email.com", "pass123", false, null));
@@ -50,6 +50,7 @@ public class OrderRepositoryTest {
     }
 
     @Test
+    @DisplayName("The test verifies the ability to retrieve an order by its ID.")
     void testReadOrder() {
         //Given
         User user = userRepository.save(new User(null, "reader", "email@email.com", "pass123", false, null));
@@ -67,6 +68,7 @@ public class OrderRepositoryTest {
     }
 
     @Test
+    @DisplayName("Test modifies the status of an existing order.")
     void testUpdateOrderStatus() {
         //Given
         User user = userRepository.save(new User(null, "updater", "email@email.com", "pass123", false, null));
@@ -82,6 +84,7 @@ public class OrderRepositoryTest {
     }
 
     @Test
+    @DisplayName("Tests the removal of the Order entity from the database.")
     void testDeleteOrder() {
         //Given
         User user = userRepository.save(new User(null, "delete", "email@email.com", "pass123", false, null));
