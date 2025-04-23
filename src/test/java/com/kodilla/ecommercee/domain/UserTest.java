@@ -56,11 +56,11 @@ class UserTest {
         User savedUser = userRepository.save(user);
 
         // When
-        savedUser.setEmail("admin@email.com");
+        savedUser.setEmail("admin2@email.com");
         User updatedUser = userRepository.save(savedUser);
 
         // Then
-        assertEquals("admin@email.com", updatedUser.getEmail());
+        assertEquals("admin2@email.com", updatedUser.getEmail());
     }
 
     @Test
