@@ -13,7 +13,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-class ProductTest {
+class ProductTests {
 
     @Autowired
     private ProductRepository productRepository;
@@ -100,4 +100,5 @@ class ProductTest {
         assertEquals("Audio", stillExists.get().getName());
     }
 }
+
 
