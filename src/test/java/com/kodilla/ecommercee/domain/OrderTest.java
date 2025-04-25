@@ -17,7 +17,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-public class OrderRepositoryTest {
+public class OrderTest {
     @Autowired
     private OrderRepository orderRepository;
     @Autowired
