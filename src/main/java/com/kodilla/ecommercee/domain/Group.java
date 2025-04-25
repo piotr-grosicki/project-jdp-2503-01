@@ -3,6 +3,7 @@ package com.kodilla.ecommercee.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,7 +26,7 @@ public class Group {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "groupId", fetch = FetchType.LAZY)
-    private List<Product> products;
+    @OneToMany(mappedBy = "groupId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Product> products = new ArrayList<>();
 
 }
