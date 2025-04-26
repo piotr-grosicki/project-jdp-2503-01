@@ -37,7 +37,7 @@ class ProductTests {
         // then
         assertTrue(found.isPresent());
         assertEquals("Smartphone", found.get().getName());
-        assertEquals("Electronics", found.get().getGroupId().getName());
+        assertEquals("Electronics", found.get().getGroup().getName());
     }
 
     @Test

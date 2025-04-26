@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Entity
-@Table(name = "product")
+@Table(name = "products")
 public class Product {
 
     @Id
@@ -29,5 +29,5 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "group_id")
-    private Group groupId;
+    private Group group;
 }
