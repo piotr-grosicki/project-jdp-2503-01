@@ -1,7 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.Group;
-import com.kodilla.ecommercee.dto.GroupDto;
+import com.kodilla.ecommercee.domain.GroupDto;
 import com.kodilla.ecommercee.mapper.GroupMapper;
 import com.kodilla.ecommercee.service.GroupService;
 import lombok.RequiredArgsConstructor;
