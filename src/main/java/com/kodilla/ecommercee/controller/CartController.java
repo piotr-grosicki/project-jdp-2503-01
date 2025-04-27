@@ -1,7 +1,12 @@
 package com.kodilla.ecommercee.controller;
 
 
+import com.kodilla.ecommercee.domain.Cart;
+import com.kodilla.ecommercee.domain.CartDto;
+import com.kodilla.ecommercee.mapper.CartMapper;
+import com.kodilla.ecommercee.service.CartService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,24 +16,41 @@ import java.util.List;
 @RequestMapping("/v1/carts")
 @RequiredArgsConstructor
 public class CartController {
+
+    private final CartService cartService;
+    private final CartMapper cartMapper;
+
     @GetMapping
-    public List<String> getAllCarts() {
-        return List.of("Cart 1", "Cart 2", "Cart 3");
+    public ResponseEntity<List<CartDto>> getAllCarts() {
+
+        List<Cart> carts = cartService.findAllCarts();
+        return ResponseEntity.ok(cartMapper.mapToCartDtoList(carts));
     }
+
     @GetMapping("/{id}")
-    public String getCartById(@PathVariable Long id) {
-        return "Cart wth ID: " + id;
+    public ResponseEntity<CartDto> getCartById(@PathVariable Long id) throws CartNotFoundException {
+
+        return ResponseEntity.ok(cartMapper.mapToCartDto(cartService.findCartById(id)));
     }
+
     @PostMapping
-    public String createCart(@RequestBody String cart) {
-        return "Cart created: " + cart;
+    public ResponseEntity<CartDto> createCart(@RequestBody CartDto cartDto) throws UserNotFoundException {
+
+        Cart cart = cartMapper.mapToCart(cartDto);
+        Cart savedCart = cartService.saveCart(cart);
+        return ResponseEntity.ok(cartMapper.mapToCartDto(savedCart));
     }
+
     @PutMapping("/{id}")
-    public String updateCart(@PathVariable Long id, @RequestBody String cart) {
-        return "Cart with ID: " + id + " updated: " + cart;
+    public ResponseEntity<CartDto> updateCart(@PathVariable Long id, @RequestBody CartDto cartDto) throws UserNotFoundException, CartNotFoundException {
+        Cart updatedCart = cartService.updateCart(id, cartDto);
+        return ResponseEntity.ok(cartMapper.mapToCartDto(updatedCart));
     }
+
     @DeleteMapping("/{id}")
-    public String deleteCart(@PathVariable Long id) {
-        return "Cart with ID: " + id + " deleted";
+    public ResponseEntity<Void> deleteCart(@PathVariable Long id) throws CartNotFoundException {
+
+         cartService.deleteCart(id);
+         return ResponseEntity.noContent().build();
     }
 }
