@@ -1,6 +1,11 @@
 package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.domain.User;
+import com.kodilla.ecommercee.domain.UserDto;
+import com.kodilla.ecommercee.mapper.UserMapper;
+import com.kodilla.ecommercee.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,28 +16,50 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
 
+    private final UserService userService;
+    private final UserMapper userMapper;
+
     @GetMapping
-    public List<String> getAllUsers() {
-        return List.of("John Doe", "Jane Smith", "Alice Johnson");
+    public ResponseEntity<List<UserDto>> getAllUsers() {
+        List<User> users = userService.getAllUsers();
+        return ResponseEntity.ok(userMapper.mapToUserDtoList(users));
     }
 
     @GetMapping("/{id}")
-    public String getUserById(@PathVariable Long id) {
-        return "User with ID: " + id;
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
+        try {
+            User user = userService.getUserById(id);
+            return ResponseEntity.ok(userMapper.mapToUserDto(user));
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+
     }
 
     @PostMapping
-    public String createUser(@RequestBody String user) {
-        return "User created: " + user;
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
+        User user = userMapper.mapToUser(userDto);
+        User savedUser = userService.saveUser(user);
+        return ResponseEntity.ok(userMapper.mapToUserDto(savedUser));
     }
 
     @PutMapping("/{id}")
-    public String updateUser(@PathVariable Long id, @RequestBody String user) {
-        return "User with ID " + id + " updated to: " + user;
+    public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {
+        try {
+            User updatedUser = userService.updateUser(id, userMapper.mapToUser(userDto));
+            return ResponseEntity.ok(userMapper.mapToUserDto(updatedUser));
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable Long id) {
-        return "User with ID " + id + " deleted.";
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        try {
+            userService.deleteUserById(id);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
