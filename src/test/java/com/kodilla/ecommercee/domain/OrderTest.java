@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
@@ -30,7 +31,7 @@ public class OrderTest {
     void testCreateOrderWithUserAndCart() {
         //Given
         User user = userRepository.save(new User(null, "order_user", "email@email.com", "pass123", false, null));
-        Cart cart = new Cart(null, new Date(), user, new ArrayList<>());
+        Cart cart = new Cart(null, LocalDateTime.now(), user, new ArrayList<>());
         cart = cartRepository.save(cart);
 
         Order order = new Order();
@@ -54,7 +55,7 @@ public class OrderTest {
     void testReadOrder() {
         //Given
         User user = userRepository.save(new User(null, "reader", "email@email.com", "pass123", false, null));
-        Cart cart = cartRepository.save(new Cart(null, new Date(), user, new ArrayList<>()));
+        Cart cart = cartRepository.save(new Cart(null, LocalDateTime.now(), user, new ArrayList<>()));
         Order order = orderRepository.save(new Order(null, LocalDate.now(), "PENDING", user, cart));
 
         //When
@@ -72,7 +73,7 @@ public class OrderTest {
     void testUpdateOrderStatus() {
         //Given
         User user = userRepository.save(new User(null, "updater", "email@email.com", "pass123", false, null));
-        Cart cart = cartRepository.save(new Cart(null, new Date(), user, new ArrayList<>()));
+        Cart cart = cartRepository.save(new Cart(null, LocalDateTime.now(), user, new ArrayList<>()));
         Order order = orderRepository.save(new Order(null, LocalDate.now(), "WAITING", user, cart));
 
         //When
@@ -88,7 +89,7 @@ public class OrderTest {
     void testDeleteOrder() {
         //Given
         User user = userRepository.save(new User(null, "delete", "email@email.com", "pass123", false, null));
-        Cart cart = cartRepository.save(new Cart(null, new Date(), user, new ArrayList<>()));
+        Cart cart = cartRepository.save(new Cart(null, LocalDateTime.now(), user, new ArrayList<>()));
         Order order = orderRepository.save(new Order(null, LocalDate.now(), "TO_DELETE", user, cart));
         Long orderId = order.getOrderId();
 
