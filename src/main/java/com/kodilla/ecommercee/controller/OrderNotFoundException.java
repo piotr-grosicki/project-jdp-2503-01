@@ -1,5 +1,5 @@
 package com.kodilla.ecommercee.controller;
 
-public class OrderNotFoundException extends RuntimeException {
+public class OrderNotFoundException extends Exception {
 }
 
