@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -44,7 +45,7 @@ class CartTests {
     @DisplayName("Should create cart with user and products")
     void testCreateCart() {
         // given
-        Cart cart = new Cart(null, new Date(), user, List.of(product));
+        Cart cart = new Cart(null, LocalDateTime.now(), user, List.of(product));
 
         // when
         Cart savedCart = cartRepository.save(cart);
@@ -62,7 +63,7 @@ class CartTests {
     void testUpdateCart() {
         // given
         Product extraProduct = productRepository.save(new Product(null, "Tablet", new BigDecimal("2999.99"), "Tablet device", null));
-        Cart cart = cartRepository.save(new Cart(null, new Date(), user, new ArrayList<>(List.of(product))));
+        Cart cart = cartRepository.save(new Cart(null, LocalDateTime.now(), user, new ArrayList<>(List.of(product))));
 
         // when
         cart.getProducts().add(extraProduct);
@@ -76,7 +77,7 @@ class CartTests {
     @DisplayName("Should delete cart but keep user and products")
     void testDeleteCart() {
         // given
-        Cart cart = cartRepository.save(new Cart(null, new Date(), user, List.of(product)));
+        Cart cart = cartRepository.save(new Cart(null, LocalDateTime.now(), user, List.of(product)));
         Long cartId = cart.getCartId();
 
         // when
@@ -92,7 +93,7 @@ class CartTests {
     @DisplayName("Should find cart by ID and verify contents")
     void testReadCart() {
         // given
-        Cart cart = cartRepository.save(new Cart(null, new Date(), user, List.of(product)));
+        Cart cart = cartRepository.save(new Cart(null, LocalDateTime.now(), user, List.of(product)));
 
         // when
         Optional<Cart> result = cartRepository.findById(cart.getCartId());
@@ -107,7 +108,7 @@ class CartTests {
     @DisplayName("Should create order from cart and link them")
     void testCartOrderRelation() {
         // given
-        Cart cart = cartRepository.save(new Cart(null, new Date(), user, new ArrayList<>()));
+        Cart cart = cartRepository.save(new Cart(null, LocalDateTime.now(), user, new ArrayList<>()));
 
         Order order = new Order();
         order.setOrderDate(LocalDate.now());
