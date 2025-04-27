@@ -30,10 +30,9 @@ public class UserController {
         try {
             User user = userService.getUserById(id);
             return ResponseEntity.ok(userMapper.mapToUserDto(user));
-        } catch (Exception e) {
+        } catch (UserNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
-
     }
 
     @PostMapping
@@ -48,7 +47,7 @@ public class UserController {
         try {
             User updatedUser = userService.updateUser(id, userMapper.mapToUser(userDto));
             return ResponseEntity.ok(userMapper.mapToUserDto(updatedUser));
-        } catch (Exception e) {
+        } catch (UserNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
     }
@@ -58,7 +57,7 @@ public class UserController {
         try {
             userService.deleteUserById(id);
             return ResponseEntity.noContent().build();
-        } catch (Exception e) {
+        } catch (UserNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
     }
