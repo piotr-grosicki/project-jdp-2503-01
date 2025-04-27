@@ -4,6 +4,7 @@ import com.kodilla.ecommercee.domain.Group;
 import com.kodilla.ecommercee.domain.GroupDto;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,7 +17,7 @@ public class GroupMapper {
                 groupDto.getGroupId(),
                 groupDto.getName(),
                 groupDto.getDescription(),
-                List.of()
+                new ArrayList<>()
         );
     }
 
