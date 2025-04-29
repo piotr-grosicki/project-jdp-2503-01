@@ -26,6 +26,7 @@ You can test it locally using **Postman**.
 - [Testing](#testing)
 - [Configuration - DB credentials](#configuration---db-credentials)
 - [API Endpoints](#api-endpoints)
+- [Project Management Tools](project-Management-tools)
 - [Contributors](#contributors)
 - [Usage & Future Development](#usage--future-development)
 - [Troubleshooting](#troubleshooting)
@@ -203,6 +204,15 @@ Ensure the database `kodilla_project` exists in MySQL.
   "cartId": 4
 }
 ```
+
+---
+
+## **Project Management Tools**
+
+The team used:
+
+- Jira – for issue tracking and sprint planning.
+- Kanban board – for task visualization and progress tracking.
 
 ---
 
