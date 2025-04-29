@@ -26,7 +26,7 @@ You can test it locally using **Postman**.
 - [Testing](#testing)
 - [Configuration - DB credentials](#configuration---db-credentials)
 - [API Endpoints](#api-endpoints)
-- [Project Management Tools](project-Management-tools)
+- [Project Management Tools](project-management-tools)
 - [Contributors](#contributors)
 - [Usage & Future Development](#usage--future-development)
 - [Troubleshooting](#troubleshooting)
